@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorías</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #14304d;
+            color: #333;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        h1 {
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .modal-content {
+            border-radius: 10px;
+        }
+        .modal-header {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .modal-header .btn-close {
+            filter: invert(1);
+        }
+        .table {
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        .table thead {
+            background-color: #0056b3; /* Color de fondo del encabezado */
+            color: #fff; /* Color del texto del encabezado */
+        }
+        .table thead th {
+            font-weight: bold;
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+        .swal2-popup {
+            font-size: 1.4rem;
+        }
+    </style>
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="#">Mi API</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">                
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Autores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="categories.html">Categorías</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="generos.html">Géneros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="publishers.html">Editoras</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="clients.html">Clientes</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h1><i class="fas fa-book"></i> Consumo de una API CLIENTES <i class="fas fa-book"></i></h1>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="text-end mb-3" style="margin-right: 90px;">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fas fa-user-plus"></i> Registrar Nuevo Cliente
+        </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Registro nuevo cliente</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" id="frm_nuevo_cliente">
+                        <div class="mb-3">
+                            <label for="first_name" class="form-label"><b>Nombre:</b></label>
+                            <input type="text" name="first_name" id="first_name" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="last_name" class="form-label"><b>Apellido:</b></label>
+                            <input type="text" name="last_name" id="last_name" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label"><b>Email:</b></label>
+                            <input type="email" name="email" id="email" class="form-control">
+                        </div> 
+                        <div class="mb-3">
+                            <label for="phone" class="form-label"><b>Teléfono:</b></label>
+                            <input type="text" name="phone" id="phone" class="form-control">
+                        </div>                                        
+                        <div class="mb-3">
+                            <label for="address" class="form-label"><b>Dirección:</b></label>
+                            <input type="text" name="address" id="address" class="form-control">
+                        </div>                                                                                                         
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa-times"></i> Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+    <h1 class="text-center">LISTADO DE CLIENTES</h1>
+    <div class="container">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>            
+                    <th>Teléfono</th>
+                    <th>Dirección</th>                                
+                </tr>
+            </thead>
+            <tbody id="clientes-tbody">
+                <tr>
+                    <td colspan="3" class="text-center">Cargando datos...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#frm_nuevo_cliente").on('submit', function(event) {
+                event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+                $.ajax({
+                    url: 'http://184.73.255.67:4000/api/clients',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json', // Asegúrate de enviar JSON
+                    data: JSON.stringify({
+                        first_name: $("#first_name").val(),
+                        last_name: $("#last_name").val(),
+                        email: $("#email").val(),            
+                        phone: $("#phone").val(),            
+                        address: $("#address").val()                                              
+                    }),
+                    success: function(data) {
+                        console.log(data);
+                        if (data.estado) {
+                            Swal.fire({
+                                title: "CONFIRMACIÓN",
+                                text: data.mensaje,
+                                icon: 'success'
+                            });
+                            $("#exampleModal").modal('hide');
+                            $("#frm_nuevo_cliente")[0].reset();
+                            cargarClientes(); // Asegúrate de que esta función esté definida
+                        } else {
+                            Swal.fire({
+                                title: "CLIENTE GUARDADO",
+                                text: data.mensaje,
+                                icon: 'success'
+                            });
+                            $("#exampleModal").modal('hide'); // Cerrar el modal aunque haya algún problema de estado
+                            $("#frm_nuevo_cliente")[0].reset();
+                            cargarClientes();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error en la solicitud:", xhr.responseText);
+                        Swal.fire({
+                            title: "ERROR",
+                            text: "Hubo un problema con la solicitud.",
+                            icon: 'error'
+                        });
+                    }
+                });
+            });
+
+            function cargarClientes() {
+                $.ajax({
+                    url: 'http://184.73.255.67:4000/api/clients',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        // Asegúrate de que data sea un array de objetos
+                        if (Array.isArray(data)) {
+                            let clientesHTML = '';
+                            data.forEach(cliente => {
+                                clientesHTML += `
+                                    <tr>
+                                        <td>${cliente.id}</td>
+                                        <td>${cliente.first_name}</td>
+                                        <td>${cliente.last_name}</td>
+                                        <td>${cliente.email}</td>                      
+                                        <td>${cliente.phone}</td>                      
+                                        <td>${cliente.address}</td>                                                                                    
+                                    </tr>
+                                `;
+                            });
+                            $('#clientes-tbody').html(clientesHTML);
+                        } else {
+                            $('#clientes-tbody').html('<tr><td colspan="3" class="text-center">No se encontraron datos</td></tr>');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error en la solicitud:", xhr);
+                        $('#clientes-tbody').html('<tr><td colspan="3" class="text-center">Error al cargar los datos</td></tr>');
+                    }
+                });
+            }
+  
+            // Cargar clientes cuando el documento esté listo
+            cargarClientes();
+        });
+    </script>
+</body>
+</html>
